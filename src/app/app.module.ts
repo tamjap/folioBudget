@@ -5,14 +5,16 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
-import { Globals } from './globals';
+import { Utilities } from '../assets/JS/utilities';
 import { MasterPageComponent } from './master-page/master-page.component';
+import { MasterBudgetComponent } from './master-budget/master-budget.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MasterPageComponent
+    MasterPageComponent,
+    MasterBudgetComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +22,7 @@ import { MasterPageComponent } from './master-page/master-page.component';
     AppRoutingModule,
   ],
   providers: [
-    Globals,
+    Utilities,
   ],
   bootstrap: [AppComponent],
 })

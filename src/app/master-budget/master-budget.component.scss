@@ -1,0 +1,71 @@
+@import '../../assets/SCSS/variables.scss';
+
+div.masterTitle {
+    border-top-left-radius: $borderRadius;
+    border-top-right-radius: $borderRadius;
+    background: $backgroundGradient;
+    padding: 10px 50px;
+    text-align: center;
+}
+div.category {
+    background: $backgroundGradient;
+    padding: 5px 20px;
+    overflow: auto;
+    h3 {
+        margin: 0;
+    }
+}
+div.categoryDescription {
+    float: left; 
+    width: 45%;
+}
+div.categoryTotal {
+    text-align: right;
+    float: right;
+    width: 40%;
+}
+
+div.masterCategoryItem {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #a7a8ad;
+    overflow: auto;
+}
+div.categoryItemDescription {
+    text-align: left;
+    padding-left: 35px;
+    float: left;
+    width: 50%;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-right-color: #a7a8ad;
+    h4 {
+        margin: 0;
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+}
+div.categoryItemAmount {
+    text-align: right;
+    padding-right: 35px;
+    float: right;
+    width: 20%;
+    border-left-style: none;
+    h4 {
+        margin: 0;
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+}
+div.masterFooter {
+    border-bottom-left-radius: $borderRadius;
+    border-bottom-right-radius: $borderRadius;
+    background: $backgroundGradient;
+    padding: 5px 20px;
+    overflow: auto;
+    h3 {
+        margin: 0;
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+}

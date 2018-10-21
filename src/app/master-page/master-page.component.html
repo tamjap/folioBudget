@@ -1,6 +1,6 @@
 <div class="frame main" >
   <div class="banner">
-    <h1>{{title}}</h1>
+    <h1>Monthly Budget</h1>
     <h3>{{month}}</h3>
     <nav>
       <a href="/input">input</a>
@@ -8,7 +8,14 @@
   </div>
   <div class="panel leftPanel">
     <div class="frame content left">
-      This is the left panel
+      <app-master-budget [currentUser]="currentUser"
+                         [categories]="categories"
+                         [paymentItems]="paymentItems"
+                         [allCategoryPayments]="allCategoryPayments"
+                         [incomes]="incomes"
+                         [incomeTotal]="incomeTotal"
+                         [paymentTotal]="paymentTotal">
+      </app-master-budget>
     </div>
   </div>
   <div class="panel rightPanel">

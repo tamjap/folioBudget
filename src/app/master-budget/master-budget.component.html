@@ -1,0 +1,45 @@
+<div class="masterTitle" onclick="updateChart()">
+  <h2>Master</h2>
+</div>
+<div *ngFor="let categoryPayment of allCategoryPayments">
+  <div class="category">
+    <div class="categoryDescription">
+      <h3>{{categoryPayment.category.description}}</h3>
+    </div>
+    <div class="categoryTotal">
+      <h3>{{categoryPayment.paymentTotal | currency}}</h3>
+    </div>
+  </div>
+  <div *ngFor="let paymentItem of categoryPayment.paymentItems">
+    <div class="masterCategoryItem">
+      <div class="categoryItemDescription">
+          <h4>{{paymentItem.description}}</h4>
+      </div>
+      <div class="categoryItemAmount">
+          <h4>{{paymentItem.amount | currency}}</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="masterFooter">
+    <div class="categoryDescription">
+        <h3>Total</h3>
+    </div>
+    <div class="categoryTotal">
+        <h3>{{paymentTotal | currency}}</h3>
+    </div>
+    <div class="categoryDescription">
+            <h3>Income</h3>
+    </div>
+    <div class="categoryTotal">
+        <h3>{{incomeTotal | currency}}</h3>
+    </div>
+    <div class="categoryDescription" onclick="updateChart('Test')">
+        <h3>Difference</h3>
+    </div>
+    <div class="categoryTotal">
+        <h3>{{(incomeTotal - paymentTotal) | currency}}</h3>
+    </div>
+</div>
+
+
