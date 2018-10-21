@@ -1,0 +1,19 @@
+<div class="frame">
+  <div class="frameTitle" id="loginBanner">
+    <h2>Login</h2>
+  </div>
+  <form #loginForm="ngForm">
+    <div class="inputLine">
+      <input placeholder="Username" #userName />
+    </div>
+    <div class="inputLine">
+      <input type="password" placeholder="Password" #password />
+    </div>
+    <div class="inputLine">
+      <label *ngIf="warningMessage" class="warning">** {{warningMessage}}</label>
+    </div>
+    <div class="inputLine">
+      <button (click)="login(userName.value, password.value)">OK</button>
+    </div>
+  </form>
+</div>

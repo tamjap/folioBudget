@@ -1,0 +1,33 @@
+div.banner {
+    nav {
+        padding-right: 10px;
+        text-align: right;
+        
+        a {
+            color: #555555;
+            text-decoration: none;
+            font-weight: bold;
+            
+            :hover {
+                color: #ffffff;
+                background: #a7a8ad;
+            }
+        }
+    }
+}
+
+div.panel {
+    margin: auto;
+    width: 50%;
+    &.leftPanel {
+        float: left;
+    }
+    &.rightPanel {
+        float: right;
+    }
+}
+
+div.frame {
+    min-width: 90%;
+    margin: 40px;
+}
