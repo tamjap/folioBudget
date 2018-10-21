@@ -1,12 +1,5 @@
 @import '../../assets/SCSS/variables.scss';
 
-div.masterTitle {
-    border-top-left-radius: $borderRadius;
-    border-top-right-radius: $borderRadius;
-    background: $backgroundGradient;
-    padding: 10px 50px;
-    text-align: center;
-}
 div.category {
     background: $backgroundGradient;
     padding: 5px 20px;

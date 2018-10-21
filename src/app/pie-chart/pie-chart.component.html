@@ -1,0 +1,22 @@
+<div class="frameTitle">
+    <h2>{{title | uppercase}}</h2>
+</div>
+<div id="pieChart">
+    <div>
+        <canvas id="Canvas"></canvas>
+    </div>
+    <div class="key">
+        <div *ngFor="let element of key; let i = index; let even = even">
+            <div *ngIf="even" class="keyRow">
+                <div class="keyItem left">
+                    <div class="keyColor" [style.background]="key[i].color" ></div>
+                    <label>{{key[i].percent | percent}} {{key[i].description}}</label>
+                </div>
+                <div *ngIf="key[i+1]" class="keyItem right">
+                    <div class="keyColor" [style.background]="key[i+1].color" ></div>
+                    <label>{{key[i+1].percent | percent}} {{key[i+1].description}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

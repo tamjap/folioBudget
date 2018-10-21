@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular/core';
 
 import { User } from '../classes/user';
 import { Category } from '../classes/category';
@@ -22,8 +22,14 @@ export class MasterBudgetComponent implements OnInit {
   @Input() paymentTotal: number;
   @Input() allCategoryPayments: CategoryPayments[]
   
+  @Output() changeChart = new EventEmitter<string>();
+   
   constructor(private util: Utilities) { }
 
   ngOnInit() {
+  }
+
+  updateChart(group: string) {
+    this.changeChart.next(group.toLowerCase());
   }
 }

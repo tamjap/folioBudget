@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -7,7 +7,9 @@ import { Category } from '../classes/category';
 import { Income } from '../classes/income';
 import { PaymentItem } from '../classes/paymentItem';
 import { CategoryPayments } from '../classes/categoryPayments'
+import { ChartData } from '../classes/chartData';
 import { Utilities } from '../../assets/JS/utilities';
+import { PieChartComponent } from '../pie-chart/pie-chart.component';
 
 import { USERS } from '../mockData/mock-users';
 import { CATEGORIES } from '../mockData/mock-categories';
@@ -36,6 +38,8 @@ const months = [
 })
 
 export class MasterPageComponent implements OnInit {
+  @ViewChild(PieChartComponent) pieChartPage: PieChartComponent;
+
   title = 'Monthly Budget';
   month = months[new Date().getMonth()];
   currentUser: User;
@@ -45,6 +49,8 @@ export class MasterPageComponent implements OnInit {
   incomes: Income[];
   incomeTotal: number;
   paymentTotal: number;
+  chartData: ChartData[];
+  rightFrameTitle: string;
 
   constructor (
     private router: Router,
@@ -61,16 +67,19 @@ export class MasterPageComponent implements OnInit {
     let categoryIDs = this.categories.map(category => category.id);
 
     this.paymentItems = PAYMENTITEMS.filter(paymentItem => {
-      return categoryIDs.includes(paymentItem.categoryID)
+      return categoryIDs.indexOf(paymentItem.categoryID)>=0;
     });
 
     this.allCategoryPayments = [];
+    this.chartData = [];
     this.categories.forEach(category => {
       let thisCatPayments = this.paymentItems.filter(paymentItem => {
         return paymentItem.categoryID === category.id;
       });
       let categoryTotal = this.util.sumProperty(thisCatPayments, 'amount');
+      let description = category.description;
       this.allCategoryPayments.push({ category: category, paymentItems: thisCatPayments, paymentTotal: categoryTotal});
+      this.chartData.push({ description: description, amount: categoryTotal })
     });
 
     this.incomes = INCOMES.filter(income => {
@@ -79,6 +88,7 @@ export class MasterPageComponent implements OnInit {
 
     this.incomeTotal = this.util.sumProperty(this.incomes, 'amount');
     this.paymentTotal = this.util.sumProperty(this.paymentItems, 'amount');
+    this.rightFrameTitle = "Budget";
   }
 
   getCurrentUser() {
@@ -92,6 +102,36 @@ export class MasterPageComponent implements OnInit {
     else {
     alert("Error getting user " + id);
     this.router.navigate(['login']);
+    }
+  }
+
+  updateChart(category: string) {
+    this.getChartData(category);
+    if (category.length === 0 || category === "master") {
+      category = "Budget";
+    }
+    this.pieChartPage.updateChart(this.chartData,category);
+  }
+  getChartData(group: string) {
+    this.chartData = [];
+    let arrCategory = this.categories.filter(category => {
+      return category.description.toLowerCase() === group.toLowerCase();
+    });
+    if (arrCategory.length > 0) {
+      let items = this.paymentItems.filter(paymentItem => {
+        return paymentItem.categoryID === arrCategory[0].id;
+      });
+      items.forEach(item => {
+        this.chartData.push({ description: item.description, amount: item.amount });
+      });
+    }
+    else {
+      this.allCategoryPayments.forEach(category => {
+        this.chartData.push({
+              description: category.category.description,
+              amount: this.util.sumProperty(category.paymentItems, 'amount')
+        });
+      });
     }
   }
 }

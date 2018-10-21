@@ -3,24 +3,30 @@
     <h1>Monthly Budget</h1>
     <h3>{{month}}</h3>
     <nav>
-      <a href="/input">input</a>
     </nav>
   </div>
-  <div class="panel leftPanel">
-    <div class="frame content left">
-      <app-master-budget [currentUser]="currentUser"
-                         [categories]="categories"
-                         [paymentItems]="paymentItems"
-                         [allCategoryPayments]="allCategoryPayments"
-                         [incomes]="incomes"
-                         [incomeTotal]="incomeTotal"
-                         [paymentTotal]="paymentTotal">
-      </app-master-budget>
+  <div class="content">
+    <div class="panel leftPanel">
+      <div class="frame content left">
+        <app-master-budget 
+          [currentUser]="currentUser"
+          [categories]="categories"
+          [paymentItems]="paymentItems"
+          [allCategoryPayments]="allCategoryPayments"
+          [incomes]="incomes"
+          [incomeTotal]="incomeTotal"
+          [paymentTotal]="paymentTotal"
+          (changeChart)="updateChart($event)">
+        </app-master-budget>
+      </div>
     </div>
-  </div>
-  <div class="panel rightPanel">
-    <div class="frame content right">
-      This is the right panel
+    <div class="panel rightPanel">
+      <div class="frame content right">
+        <app-pie-chart 
+          [chartData]="chartData"
+          [title]="rightFrameTitle">
+        </app-pie-chart>
+      </div>
     </div>
   </div>
 </div>
