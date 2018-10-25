@@ -17,8 +17,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "baseHref": "/monthlyBudget/",
-            "deployUrl": "/monthlyBudget/",
+            "baseHref": "/portfolio/monthlyBudget/",
+            "deployUrl": "/portfolio/monthlyBudget/",
             "outputPath": "dist/monthlyBudget",
             "index": "src/index.html",
             "main": "src/main.ts",

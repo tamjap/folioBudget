@@ -1,0 +1,42 @@
+@import '../../assets/SCSS/variables.scss';
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: auto;
+}
+
+tr:nth-child(even) {
+    background-color: #e2e2e2
+}
+th {
+    text-align: right;
+    background: $gray;
+}
+td {
+    /*@include border();*/
+    text-align: right;
+    &:hover span.tooltip {
+        visibility: visible;
+    }
+  .day {
+      border: 0;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      font-weight: bold;
+      background: $gray;
+    }
+    span.tooltip{
+        @include border();
+        visibility: hidden;
+        background: #999999;
+        font-weight: bold;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        border-radius: $borderRadius;
+        white-space: pre;
+        text-align: left;
+    }
+}

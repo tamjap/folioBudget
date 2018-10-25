@@ -1,0 +1,43 @@
+<div class="frameTitle">
+  <h2>CALENDAR</h2>
+</div>
+<div class="content">
+  <table class="calendarData">
+    <tr>
+      <th>
+        
+      </th>
+      <th>
+        Income
+      </th>
+      <th>
+        Payments
+      </th>
+      <th>
+        Balance
+      </th>
+    </tr>
+    <tr *ngFor="let day of calendarData">
+      <td class="day">
+        <div class="day">
+          {{day.day}}
+        </div>
+      </td>
+      <td class="income">
+        {{day.income | currency}}
+        <span *ngIf="day.incomeTT" class="tooltip">
+          {{day.incomeTT}}
+        </span>
+      </td>
+      <td class="payment">
+        {{day.payment | currency}}
+        <span *ngIf="day.paymentTT" class="tooltip">
+          {{day.paymentTT}}
+        </span>
+      </td>
+      <td class="balance">
+        {{day.balance | currency}}
+      </td>
+    </tr>
+  </table>
+</div>

@@ -8,6 +8,7 @@ import { Income } from '../classes/income';
 import { PaymentItem } from '../classes/paymentItem';
 import { CategoryPayments } from '../classes/categoryPayments'
 import { ChartData } from '../classes/chartData';
+import { CalendarData } from '../classes/calendarData';
 import { Utilities } from '../../assets/JS/utilities';
 import { PieChartComponent } from '../pie-chart/pie-chart.component';
 
@@ -50,7 +51,9 @@ export class MasterPageComponent implements OnInit {
   incomeTotal: number;
   paymentTotal: number;
   chartData: ChartData[];
+  calendarData: CalendarData[];
   rightFrameTitle: string;
+  rightPanel: string;
 
   constructor (
     private router: Router,
@@ -60,7 +63,10 @@ export class MasterPageComponent implements OnInit {
   ){}
 
   ngOnInit() {
+    this.rightPanel = "pieChart";
     this.getCurrentUser();
+
+    //Master Budget Data
     this.categories = CATEGORIES.filter(category => {
       return category.userID === this.currentUser.id;
     });
@@ -89,6 +95,51 @@ export class MasterPageComponent implements OnInit {
     this.incomeTotal = this.util.sumProperty(this.incomes, 'amount');
     this.paymentTotal = this.util.sumProperty(this.paymentItems, 'amount');
     this.rightFrameTitle = "Budget";
+  
+    //Calendar
+    let now = new Date();
+    let dayCount = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+    let balance = 0;
+    this.calendarData = [];
+
+    for (let x=1; x<=dayCount; x++) {
+      this.calendarData.push({ day: x, income: 0, incomeTT: '', payment: 0, paymentTT: '', balance: 0 });
+    }
+    this.incomes.forEach(income => {
+      income.dueDay.forEach(dueDate => {
+        let amount = Math.round(income.amount / income.dueDay.length);
+        let day=dueDate;
+        if (day > dayCount) {
+          day = dayCount;
+        }
+        this.calendarData[day - 1].income += amount;
+        if (this.calendarData[day - 1].incomeTT.length > 0) {
+          this.calendarData[day - 1].incomeTT += '\n';
+        }
+        this.calendarData[day - 1].incomeTT += "$ " + amount.toFixed(2).toString();
+        this.calendarData[day - 1].incomeTT += ":   " + income.description;
+      });
+    });
+    this.paymentItems.forEach(paymentItem => {
+      paymentItem.dueDay.forEach(dueDate => {
+        let amount = Math.round(paymentItem.amount / paymentItem.dueDay.length);
+        let day=dueDate;
+        if (day > dayCount) {
+          day = dayCount;
+        }
+        this.calendarData[day - 1].payment += amount;
+        if (this.calendarData[day - 1].paymentTT.length > 0) {
+          this.calendarData[day - 1].paymentTT += '\n';
+        }
+        this.calendarData[day - 1].paymentTT += "$ " + amount.toFixed(2).toString();
+        this.calendarData[day - 1].paymentTT += ":   " + paymentItem.description;
+      })
+    })
+    for (let x=0; x<dayCount; x++) {
+      balance += this.calendarData[x].income;
+      balance -= this.calendarData[x].payment;
+      this.calendarData[x].balance = balance;
+    }
   }
 
   getCurrentUser() {

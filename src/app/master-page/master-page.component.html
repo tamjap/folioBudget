@@ -2,9 +2,23 @@
   <div class="banner">
     <h1>Monthly Budget</h1>
     <h3>{{month}}</h3>
-    <nav>
-    </nav>
   </div>
+<div class="menu">
+    <nav>
+      <ul>
+        <li>
+          <div *ngIf="rightPanel !== 'calendar'" class="frame" (click)="rightPanel = 'calendar'">
+            Calendar
+          </div>
+        </li>
+        <li>
+          <div *ngIf="rightPanel !== 'pieChart'" class="frame" (click)="rightPanel = 'pieChart'">
+            Pie Chart
+          </div>
+        </li>
+      </ul>
+    </nav>
+</div>
   <div class="content">
     <div class="panel leftPanel">
       <div class="frame content left">
@@ -22,10 +36,13 @@
     </div>
     <div class="panel rightPanel">
       <div class="frame content right">
-        <app-pie-chart 
+        <app-pie-chart *ngIf="rightPanel === 'pieChart'"
           [chartData]="chartData"
           [title]="rightFrameTitle">
         </app-pie-chart>
+        <app-calendar *ngIf="rightPanel === 'calendar'"
+          [calendarData]="calendarData">
+        </app-calendar>
       </div>
     </div>
   </div>

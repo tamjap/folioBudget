@@ -1,0 +1,9 @@
+$backgroundGradient: linear-gradient(#a7a8ad, #ffffff 25%, #a7a8ad);
+$borderRadius: 15px;
+$gray: #a7a8ad;
+
+@mixin border() {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #a7a8ad;
+}

@@ -3,4 +3,13 @@ div.frame {
     display: block;
     max-width: 100px;
     margin-top: 100px;
+    overflow: hidden;
+    @media only screen and (max-width: 700px) {
+        max-width: 80%;
+        width: 80%;
+    }
 }
+/*
+div.frame {
+    padding: 20px;
+}*/

@@ -5,7 +5,7 @@ div.banner {
     background: $backgroundGradient;
     border-top-left-radius: $borderRadius;
     border-top-right-radius: $borderRadius;
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
     h1 {
         padding: 20px;   
         margin: 0;    
@@ -30,6 +30,24 @@ div.banner {
     }
 }
 
+div.menu {
+    width: 100%;
+    overflow: hidden;
+    li {
+        list-style-type: none;
+        margin-right: 30px;
+        .frame {
+            float: right;
+            background: $backgroundGradient;
+            min-width: auto;
+            max-width: 100px;
+            max-height: 40px;
+            padding: 10px;
+            text-align: center;
+        }
+    }
+}
+
 div.content {
     margin: auto;
     display: block;
@@ -45,6 +63,7 @@ div.panel {
         float: right;
     }
     @media only screen and (max-width: 700px) {
+        margin: auto;
         &.leftPanel {
             float: none;
             width: 95%;

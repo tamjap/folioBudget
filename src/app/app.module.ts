@@ -10,6 +10,7 @@ import { Piechart } from '../assets/JS/pieChart';
 import { MasterPageComponent } from './master-page/master-page.component';
 import { MasterBudgetComponent } from './master-budget/master-budget.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
     MasterPageComponent,
     MasterBudgetComponent,
     PieChartComponent,
+    CalendarComponent,
   ],
   imports: [
     BrowserModule,
